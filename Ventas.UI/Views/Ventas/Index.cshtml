@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Ventas.Dominio.Modelos.Venta>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <h2>Lista de Ventas</h2>
+
+            <p>
+                @Html.ActionLink("Crear Nuevo", "Create")
+            </p>
+            <table id="data" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaVenta)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.impuesto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.total)
+                        </th>
+                        <th>
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaVenta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.impuesto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.total)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#data").DataTable();
+        })
+    </script>
+}

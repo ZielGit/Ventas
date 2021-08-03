@@ -1,0 +1,50 @@
+﻿@model Ventas.Dominio.Modelos.Venta
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col">
+    <div class="card">
+        <div class="card-header">
+            <h2>Detalles</h2>
+        </div>
+        <div class="card-body">
+            <div>
+                <h4>Venta</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FechaVenta)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FechaVenta)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.impuesto)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.impuesto)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.total)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.total)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </div>
+</div>

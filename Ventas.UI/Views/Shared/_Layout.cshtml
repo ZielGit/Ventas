@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    <title>@ViewBag.Title - Aplicación de Ventas Online</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/adminlte/dist/css/adminlte.min.css">
+    <!-- DataTables -->
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- DataTable -->
+    <link rel="stylesheet" href="~/Content/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/Home/Index">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Categoria/ListarCategoria">Categorias</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Producto/Index1">Productos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Cliente/ListarCliente">Clientes</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-link">
+            <img src="~/Content/adminlte/dist/img/logo.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">EMPRESA CALUJO</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="~/Content/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">Administrador</a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="/Home/Index" class="nav-link">
+                            <i class="fa fa-home menu-icon"></i>
+                            <p>
+                                Home
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Categoria/ListarCategoria" class="nav-link">
+                            <i class="fas fa-tags menu-icon"></i>
+                            <p>
+                                Categorias
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Producto/Index1" class="nav-link">
+                            <i class="fas fa-boxes menu-icon"></i>
+                            <p>
+                                Productos
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Cliente/ListarCliente" class="nav-link">
+                            <i class="fas fa-users menu-icon"></i>
+                            <p>
+                                Clientes
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Proveedor/Index" class="nav-link">
+                            <i class="fas fa-shipping-fast menu-icon"></i>
+                            <p>
+                                Proveedores
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Compra/Index" class="nav-link">
+                            <i class="fas fa-cart-plus menu-icon"></i>
+                            <p>
+                                Compras
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Ventas/Index" class="nav-link">
+                            <i class="fas fa-shopping-cart menu-icon"></i>
+                            <p>
+                                Ventas
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    @RenderBody()
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2014-2021 | Calujo S.A.C.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 3.1.0
+        </div>
+    </footer>
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="~/Content/adminlte/plugins/jquery/jquery.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/adminlte/dist/js/adminlte.js"></script>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- DataTable -->
+    <script src="~/Content/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

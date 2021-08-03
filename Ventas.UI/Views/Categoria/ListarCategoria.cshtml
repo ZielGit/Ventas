@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Ventas.Dominio.Modelos.Categoria>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Categoria</title>
+</head>
+<body>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    @Html.ActionLink("Agregar Categoria", "AgregarCategoria", "Categoria", null, new { @class = "btn btn-danger", @target = "_blank" })
+                </div><br />
+
+                <table id="data" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Categoria_Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nombre)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Estado)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Categoria_Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#data").DataTable();
+        })
+    </script>
+}
