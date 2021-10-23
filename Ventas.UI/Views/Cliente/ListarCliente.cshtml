@@ -5,13 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles{
+    <!-- DataTable -->
+    <link rel="stylesheet" href="~/Content/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+}
+
 <div class="col-12">
     <div class="card">
         <div class="card-body">
             <h2>Lista de Clientes</h2>
 
             <div>
-                @Html.ActionLink("Agregar Cliente", "AgregarCliente", "Cliente", null, new { @class = "btn btn-danger", @target = "_blank" })
+                @Html.ActionLink("Agregar Cliente", "AgregarCliente", "Cliente", null, new { @class = "btn btn-danger" })
             </div>
 
             <table id="data" class="table table-striped">
@@ -80,6 +85,10 @@
 </div>
 
 @section scripts{
+    <!-- DataTable -->
+    <script src="~/Content/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $("#data").DataTable();

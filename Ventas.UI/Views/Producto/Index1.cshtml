@@ -8,97 +8,105 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
+@section styles{
+    <!-- DataTable -->
+    <link rel="stylesheet" href="~/Content/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+}
 
-                <form method="post">
-                    <div class="container">
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
 
-                        <br />
-                        <div class="row row-cols-5">
-                            <div class="col-3">
-                                <label for="dato1" class="col-auto">Categorías</label>
-                                @Html.DropDownList("dato1", listaCate, new SelectList(listaCate, "value", "text"))
-                            </div>
-                            <div class="col-3">
-                                <label for="nombre">Nombre</label>
-                                <input class="form-control" type="text" name="dato2" placeholder="Ingresa texto" /><br />
-                            </div>
-                            <div class="col-3">
-                                <label>Ordenar : </label><br />
-                                <input type="radio" , id="o1">
-                                <label for="o1"> Por Precio  </label>
-                                <input type="radio" , id="o2">
-                                <label for="o2"> Por Nombre  </label>
-                            </div>
+            <form method="post">
+                <div class="container">
 
-                            <div class="col-2">
-                                <label for="c1">Solo Activos</label>
-                                <input type="checkbox" , id="c1">
-                            </div>
-
-                            <div class="col-1">
-                                <button type="submit" class="bg-transparent">Filtrar</button>
-                                @Html.ActionLink("PDF", "generarPDF", "Producto", null, new { @class = "btn btn-danger", @target = "_blank" })
-                            </div>
+                    <br />
+                    <div class="row row-cols-5">
+                        <div class="col-3">
+                            <label for="dato1" class="col-auto">Categorías</label>
+                            @Html.DropDownList("dato1", listaCate, new SelectList(listaCate, "value", "text"))
                         </div>
-                        <br />
-                    </div>
-                </form>
+                        <div class="col-3">
+                            <label for="nombre">Nombre</label>
+                            <input class="form-control" type="text" name="dato2" placeholder="Ingresa texto" /><br />
+                        </div>
+                        <div class="col-3">
+                            <label>Ordenar : </label><br />
+                            <input type="radio" , id="o1">
+                            <label for="o1"> Por Precio  </label>
+                            <input type="radio" , id="o2">
+                            <label for="o2"> Por Nombre  </label>
+                        </div>
 
-                <table class="table table-striped">
-                    <thead>
+                        <div class="col-2">
+                            <label for="c1">Solo Activos</label>
+                            <input type="checkbox" , id="c1">
+                        </div>
+
+                        <div class="col-1">
+                            <button type="submit" class="bg-transparent">Filtrar</button>
+                            @Html.ActionLink("PDF", "generarPDF", "Producto", null, new { @class = "btn btn-danger", @target = "_blank" })
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </form>
+
+            <table id="data" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Stock)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Estado)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Id)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Nombre)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Precio)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Stock)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Estado)
-                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Stock)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Id)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Precio)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Stock)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Estado)
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+@section scripts{
+    <!-- DataTable -->
+    <script src="~/Content/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#data").DataTable();
+        })
+    </script>
+}

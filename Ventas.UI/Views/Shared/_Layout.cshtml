@@ -13,8 +13,7 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <!-- DataTable -->
-    <link rel="stylesheet" href="~/Content/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    @RenderSection("styles", required: false)
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -141,9 +140,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <!-- DataTable -->
-    <script src="~/Content/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/Content/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
