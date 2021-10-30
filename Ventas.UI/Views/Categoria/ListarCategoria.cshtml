@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Ventas.Dominio.Modelos.Categoria>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Lista de Categorías";
 }
 
 @section styles{
@@ -12,6 +12,8 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
+            <h2>Lista de Categorías</h2>
+            
             <div>
                 @Html.ActionLink("Agregar Categoria", "AgregarCategoria", "Categoria", null, new { @class = "btn btn-primary" })
             </div><br />
