@@ -13,92 +13,109 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables.net-bs4@1.10.24/css/dataTables.bootstrap4.min.css">
 }
 
-<div class="col-12">
-    <div class="card">
-        <div class="card-body">
-            <h2>Lista de Productos</h2>
-
-            <form method="post">
-                <div class="container">
-
-                    <br />
-                    <div class="row row-cols-5">
-                        <div class="col-3">
-                            <label for="dato1" class="col-auto">Categorías</label>
-                            @Html.DropDownList("dato1", listaCate, new SelectList(listaCate, "value", "text"))
-                        </div>
-                        <div class="col-3">
-                            <label for="nombre">Nombre</label>
-                            <input class="form-control" type="text" name="dato2" placeholder="Ingresa texto" /><br />
-                        </div>
-                        <div class="col-3">
-                            <label>Ordenar : </label><br />
-                            <input type="radio" , id="o1">
-                            <label for="o1"> Por Precio  </label>
-                            <input type="radio" , id="o2">
-                            <label for="o2"> Por Nombre  </label>
-                        </div>
-
-                        <div class="col-2">
-                            <label for="c1">Solo Activos</label>
-                            <input type="checkbox" , id="c1">
-                        </div>
-
-                        <div class="col-1">
-                            <button type="submit" class="bg-transparent">Filtrar</button>
-                            @Html.ActionLink("PDF", "generarPDF", "Producto", null, new { @class = "btn btn-danger", @target = "_blank" })
-                        </div>
-                    </div>
-                    <br />
-                </div>
-            </form>
-
-            <table id="data" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Precio)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Stock)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Estado)
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Precio)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Stock)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Estado)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Lista de Productos</h1>
+            </div>
+            <div class="col-sm-6 text-right">
+                @Html.ActionLink("PDF", "generarPDF", "Producto", null, new { @class = "btn btn-danger", @target = "_blank" })
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="row row-cols-5">
+                                <div class="col-3">
+                                    <label for="dato1" class="col-auto">Categorías</label>
+                                    @Html.DropDownList("dato1", listaCate, new SelectList(listaCate, "value", "text"))
+                                </div>
+                                <div class="col-3">
+                                    <label for="nombre">Nombre</label>
+                                    <input class="form-control" type="text" name="dato2" placeholder="Ingresa texto" />
+                                </div>
+                                <div class="col-3">
+                                    <label>Ordenar : </label><br />
+                                    <input type="radio" , id="o1">
+                                    <label for="o1"> Por Precio  </label>
+                                    <input type="radio" , id="o2">
+                                    <label for="o2"> Por Nombre  </label>
+                                </div>
+
+                                <div class="col-2">
+                                    <label for="c1">Solo Activos</label>
+                                    <input type="checkbox" , id="c1">
+                                </div>
+
+                                <div class="col-1">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <table id="data" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Id)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Precio)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Stock)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Estado)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Precio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Stock)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Estado)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 @section scripts{
     <!-- DataTable -->
