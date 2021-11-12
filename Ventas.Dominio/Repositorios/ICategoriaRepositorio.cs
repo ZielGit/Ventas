@@ -14,6 +14,8 @@ namespace Ventas.Dominio.Repositorios
         int Agregar(Categoria categoria);
         bool Modificar(Categoria categoria);
         IEnumerable<Categoria> ListarCategoria();
+        Categoria ObtenerPorId(int id);
+        bool Eliminar(int id);
     }
 }
 

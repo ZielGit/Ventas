@@ -39,5 +39,22 @@ namespace Ventas.Infraestructura.Repositorios
             return true;
         }
 
+        public Categoria ObtenerPorId(int id)
+        {
+            return db.Categoria.Find(id);
+        }
+
+        public bool Eliminar(int id)
+        {
+            var categoria = db.Categoria.Find(id);
+            if (categoria == null)
+            {
+                return false;
+            }
+            db.Categoria.Remove(categoria);
+            db.SaveChanges();
+            return true;
+        }
+
     }
 }
