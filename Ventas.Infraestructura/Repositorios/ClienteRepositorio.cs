@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Ventas.Infraestructura.Repositorios.Base;
 
 namespace Ventas.Infraestructura.Repositorios
 {
-    public class ClienteRepositorio : IClientrRepositorio
+    public class ClienteRepositorio : IClienteRepositorio
     {
         VentasDbContexto db = new VentasDbContexto();
 
@@ -34,7 +35,26 @@ namespace Ventas.Infraestructura.Repositorios
 
         public bool Modificar(Cliente cliente)
         {
-            throw new NotImplementedException();
+            db.Entry(cliente).State = EntityState.Modified;
+            db.SaveChanges();
+            return true;
+        }
+
+        public Cliente ObtenerPorId(int id)
+        {
+            return db.Cliente.Find(id);
+        }
+
+        public bool Eliminar(int id)
+        {
+            var cliente = db.Cliente.Find(id);
+            if (cliente == null)
+            {
+                return false;
+            }
+            db.Cliente.Remove(cliente);
+            db.SaveChanges();
+            return true;
         }
     }
 }

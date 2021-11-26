@@ -7,10 +7,12 @@ using Ventas.Dominio.Modelos;
 
 namespace Ventas.Dominio.Repositorios
 {
-    public interface IClientrRepositorio
+    public interface IClienteRepositorio
     {
         int Agregar(Cliente cliente);
         bool Modificar(Cliente cliente);
         IEnumerable<Cliente> ListarCliente();
+        Cliente ObtenerPorId(int id);
+        bool Eliminar(int id);
     }
 }

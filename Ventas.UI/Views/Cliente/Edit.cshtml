@@ -1,19 +1,16 @@
 ﻿@model Ventas.Dominio.Modelos.Cliente
 
 @{
-    ViewBag.Title = "CREAR NUEVO CLIENTE !";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Editar Cliente";
 }
 
-<div class="col">
+<div class="col-12">
     <div class="card">
-        <div class="card-header">
-            <h4>Crear</h4>
-        </div>
         <div class="card-body">
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)
 
                 <h4>Cliente</h4>
                 <hr />
@@ -86,7 +83,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.FechaModificacion, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col">
+                    <div class="col-md-8">
                         @Html.EditorFor(model => model.FechaModificacion, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.FechaModificacion, "", new { @class = "text-danger" })
                     </div>
@@ -94,12 +91,10 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-danger" />
-                        @Html.ActionLink("Cancelar", "ListarCliente", "Cliente", null, new { @class = "btn btn-primary" })
-
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        @Html.ActionLink("Cancelar", "Index", "Cliente", null, new { @class = "btn btn-secondary" })
                     </div>
                 </div>
-
             }
         </div>
     </div>
