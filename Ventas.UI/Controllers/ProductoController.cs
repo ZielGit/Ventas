@@ -1,4 +1,4 @@
-﻿using iText.IO.Font.Constants;
+using iText.IO.Font.Constants;
 using iText.Kernel.Font;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ventas.Dominio.Modelos;
@@ -14,22 +15,13 @@ using Ventas.Infraestructura.Repositorios.Base;
 
 namespace Ventas.UI.Controllers
 {
-
-
     public class ProductoController : Controller
     {
-
         ProductoRepositorio dbProd = new ProductoRepositorio();
         CategoriaRepositorio dbCate = new CategoriaRepositorio();
 
         // GET: Producto
-        public ActionResult Index()
-        {
-            var lista = dbProd.ListarProductos();
-            return View(lista);
-        }
-
-        public ActionResult Index1(int? dato1, string dato2, bool? dato3, bool? dato4)
+        public ActionResult Index(int? dato1, string dato2, bool? dato3, bool? dato4)
         {
             llenarCategoria();
             ViewBag.lista = listaCate;
@@ -37,27 +29,82 @@ namespace Ventas.UI.Controllers
             var lista = dbProd.ListarProductos(dato1, dato2, dato3, dato4);
             Session["lista"] = lista;
             return View(lista);
-
         }
-        //agregar 
-        [HttpGet]
-        public ActionResult AgregarProducto()
+
+        // GET: Producto/Details/5
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Producto producto = dbProd.ObtenerPorId(id.Value);
+            if (producto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(producto);
+        }
+
+        // GET: Producto/Create
+        [HttpGet]
+        public ActionResult Create()
+        {
+            ViewBag.Categorias = new SelectList(dbCate.ListarCategoria(), "Categoria_Id", "Nombre");
             return View();
         }
 
+        // POST: Producto/Create
         [HttpPost]
-        public ActionResult AgregarProducto(Producto producto)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Nombre,Precio,Stock,Estado,FechaCreacion,FechaModificacion,Categoria_Id")] Producto producto)
         {
-            try
+            if (ModelState.IsValid)
             {
                 dbProd.Agregar(producto);
-                return RedirectToAction("ListarProductos");
+                return RedirectToAction("Index");
             }
-            catch
+            ViewBag.Categorias = new SelectList(dbCate.ListarCategoria(), "Categoria_Id", "Nombre", producto.Categoria_Id);
+            return View(producto);
+        }
+
+        // GET: Producto/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
             {
-                return RedirectToAction("ListarProductos");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Producto producto = dbProd.ObtenerPorId(id.Value);
+            if (producto == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Categorias = new SelectList(dbCate.ListarCategoria(), "Categoria_Id", "Nombre", producto.Categoria_Id);
+            return View(producto);
+        }
+
+        // POST: Producto/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Nombre,Precio,Stock,Estado,FechaCreacion,FechaModificacion,Categoria_Id")] Producto producto)
+        {
+            if (ModelState.IsValid)
+            {
+                dbProd.Modificar(producto);
+                return RedirectToAction("Index");
+            }
+            ViewBag.Categorias = new SelectList(dbCate.ListarCategoria(), "Categoria_Id", "Nombre", producto.Categoria_Id);
+            return View(producto);
+        }
+
+        // POST: Producto/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            dbProd.Eliminar(id);
+            return RedirectToAction("Index");
         }
 
         List<SelectListItem> listaCate;
@@ -149,6 +196,5 @@ namespace Ventas.UI.Controllers
 
             return File(buffer, "application/pdf");
         }
-
     }
 }

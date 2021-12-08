@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,8 @@ namespace Ventas.Infraestructura.Repositorios
 {
     public class ProductoRepositorio : IProductoRepositorio
     {
-
         VentasDbContexto db = new VentasDbContexto();
+
         public int Agregar(Producto producto)
         {
             //agregando la entidad en el contexto de EF
@@ -23,7 +24,6 @@ namespace Ventas.Infraestructura.Repositorios
             return producto.Id;
         }
 
-     
         public IEnumerable<Producto> ListarProductos()
         {
             //Consulta Linq
@@ -86,15 +86,31 @@ namespace Ventas.Infraestructura.Repositorios
                 }
             }
 
-
-
             return query.ToList();
         }
 
         public int Modificar(Producto producto)
         {
-            throw new NotImplementedException();
+            db.Entry(producto).State = EntityState.Modified;
+            db.SaveChanges();
+            return producto.Id;
         }
 
+        public Producto ObtenerPorId(int id)
+        {
+            return db.Producto.Find(id);
+        }
+
+        public bool Eliminar(int id)
+        {
+            var producto = db.Producto.Find(id);
+            if (producto == null)
+            {
+                return false;
+            }
+            db.Producto.Remove(producto);
+            db.SaveChanges();
+            return true;
+        }
     }
 }

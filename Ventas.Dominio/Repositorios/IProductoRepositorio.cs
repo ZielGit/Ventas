@@ -13,8 +13,7 @@ namespace Ventas.Dominio.Repositorios
         int Modificar(Producto producto);
         IEnumerable<Producto> ListarProductos();
         IEnumerable<Producto> ListarProductos(int? dato1, string dato2, bool? dato3, bool? dato4);
-        
-        
-
+        Producto ObtenerPorId(int id);
+        bool Eliminar(int id);
     }
 }

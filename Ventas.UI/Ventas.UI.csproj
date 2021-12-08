@@ -234,14 +234,14 @@
     <Content Include="Views\Categoria\Edit.cshtml" />
     <Content Include="Views\Categoria\Details.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
-    <Content Include="Views\Producto\Index1.cshtml" />
-    <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Producto\Edit.cshtml" />
+    <Content Include="Views\Producto\Details.cshtml" />
     <Content Include="Views\Categoria\Create.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Cliente\Details.cshtml" />
-    <Content Include="Views\Producto\AgregarProducto.cshtml" />
+    <Content Include="Views\Producto\Create.cshtml" />
     <Content Include="Views\Proveedor\Create.cshtml" />
     <Content Include="Views\Proveedor\Delete.cshtml" />
     <Content Include="Views\Proveedor\Details.cshtml" />
