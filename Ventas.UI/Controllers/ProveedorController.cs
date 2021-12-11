@@ -1,24 +1,24 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ventas.Dominio.Modelos;
-using Ventas.Infraestructura.Repositorios.Base;
+using Ventas.Infraestructura.Repositorios;
 
 namespace Ventas.UI.Controllers
 {
     public class ProveedorController : Controller
     {
-        private VentasDbContexto db = new VentasDbContexto();
+        ProveedorRepositorio dbProveedor = new ProveedorRepositorio();
 
         // GET: Proveedor
         public ActionResult Index()
         {
-            return View(db.Proveedore.ToList());
+            var lista = dbProveedor.ListarProveedores();
+
+            return View(lista);
         }
 
         // GET: Proveedor/Details/5
@@ -28,7 +28,7 @@ namespace Ventas.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Proveedor proveedor = db.Proveedore.Find(id);
+            Proveedor proveedor = dbProveedor.ObtenerPorId(id.Value);
             if (proveedor == null)
             {
                 return HttpNotFound();
@@ -37,25 +37,22 @@ namespace Ventas.UI.Controllers
         }
 
         // GET: Proveedor/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Proveedor/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Nombre,RUC,Direccion,Email,Celular")] Proveedor proveedor)
         {
             if (ModelState.IsValid)
             {
-                db.Proveedore.Add(proveedor);
-                db.SaveChanges();
+                dbProveedor.Agregar(proveedor);
                 return RedirectToAction("Index");
             }
-
             return View(proveedor);
         }
 
@@ -66,7 +63,7 @@ namespace Ventas.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Proveedor proveedor = db.Proveedore.Find(id);
+            Proveedor proveedor = dbProveedor.ObtenerPorId(id.Value);
             if (proveedor == null)
             {
                 return HttpNotFound();
@@ -75,54 +72,25 @@ namespace Ventas.UI.Controllers
         }
 
         // POST: Proveedor/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Nombre,RUC,Direccion,Email,Celular")] Proveedor proveedor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(proveedor).State = EntityState.Modified;
-                db.SaveChanges();
+                dbProveedor.Modificar(proveedor);
                 return RedirectToAction("Index");
             }
             return View(proveedor);
         }
 
-        // GET: Proveedor/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Proveedor proveedor = db.Proveedore.Find(id);
-            if (proveedor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(proveedor);
-        }
-
         // POST: Proveedor/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
-            Proveedor proveedor = db.Proveedore.Find(id);
-            db.Proveedore.Remove(proveedor);
-            db.SaveChanges();
+            dbProveedor.Eliminar(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

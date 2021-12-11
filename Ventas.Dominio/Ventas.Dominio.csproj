@@ -54,6 +54,7 @@
     <Compile Include="Repositorios\ICategoriaRepositorio.cs" />
     <Compile Include="Repositorios\IClienteRepositorio.cs" />
     <Compile Include="Repositorios\IProductoRepositorio.cs" />
+    <Compile Include="Repositorios\IProveedorRepositorio.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

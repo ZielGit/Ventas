@@ -1,15 +1,11 @@
 ﻿@model Ventas.Dominio.Modelos.Proveedor
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Editar Proveedor";
 }
 
-<div class="col">
+<div class="col-12">
     <div class="card">
-        <div class="card-header">
-            <h2>Editar</h2>
-        </div>
         <div class="card-body">
             @using (Html.BeginForm())
             {
@@ -63,15 +59,12 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                            @Html.ActionLink("Cancelar", "Index", "Proveedor", null, new { @class = "btn btn-secondary" })
                         </div>
                     </div>
                 </div>
             }
-
-            <div>
-                @Html.ActionLink("Back to List", "Index")
-            </div>
         </div>
     </div>
 </div>
