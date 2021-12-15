@@ -57,6 +57,7 @@
     <Compile Include="Repositorios\ClienteRepositorio.cs" />
     <Compile Include="Repositorios\ProductoRepositorio.cs" />
     <Compile Include="Repositorios\ProveedorRepositorio.cs" />
+    <Compile Include="Repositorios\CompraRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

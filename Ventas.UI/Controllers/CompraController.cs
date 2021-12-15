@@ -1,25 +1,24 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ventas.Dominio.Modelos;
-using Ventas.Infraestructura.Repositorios.Base;
+using Ventas.Infraestructura.Repositorios;
 
 namespace Ventas.UI.Controllers
 {
     public class CompraController : Controller
     {
-        private VentasDbContexto db = new VentasDbContexto();
+        CompraRepositorio dbCompra = new CompraRepositorio();
 
         // GET: Compra
         public ActionResult Index()
         {
-            //var compra = db.Compra.Include("CompraDetalle");
-            return View(db.Compra.ToList());
+            var lista = dbCompra.ListarCompras();
+
+            return View(lista);
         }
 
         // GET: Compra/Details/5
@@ -29,7 +28,7 @@ namespace Ventas.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Compra compra = db.Compra.Find(id);
+            Compra compra = dbCompra.ObtenerPorId(id.Value);
             if (compra == null)
             {
                 return HttpNotFound();
@@ -38,25 +37,22 @@ namespace Ventas.UI.Controllers
         }
 
         // GET: Compra/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Compra/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FechaCompra,Impuesto,total")] Compra compra)
         {
             if (ModelState.IsValid)
             {
-                db.Compra.Add(compra);
-                db.SaveChanges();
+                dbCompra.Agregar(compra);
                 return RedirectToAction("Index");
             }
-
             return View(compra);
         }
 
@@ -67,7 +63,7 @@ namespace Ventas.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Compra compra = db.Compra.Find(id);
+            Compra compra = dbCompra.ObtenerPorId(id.Value);
             if (compra == null)
             {
                 return HttpNotFound();
@@ -76,54 +72,25 @@ namespace Ventas.UI.Controllers
         }
 
         // POST: Compra/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FechaCompra,Impuesto,total")] Compra compra)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(compra).State = EntityState.Modified;
-                db.SaveChanges();
+                dbCompra.Modificar(compra);
                 return RedirectToAction("Index");
             }
             return View(compra);
         }
 
-        // GET: Compra/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Compra compra = db.Compra.Find(id);
-            if (compra == null)
-            {
-                return HttpNotFound();
-            }
-            return View(compra);
-        }
-
         // POST: Compra/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
-            Compra compra = db.Compra.Find(id);
-            db.Compra.Remove(compra);
-            db.SaveChanges();
+            dbCompra.Eliminar(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

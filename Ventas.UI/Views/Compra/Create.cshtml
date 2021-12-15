@@ -1,15 +1,11 @@
 ﻿@model Ventas.Dominio.Modelos.Compra
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Nueva Compra";
 }
 
-<div class="col">
+<div class="col-12">
     <div class="card">
-        <div class="card-header">
-            <h2>Crear</h2>
-        </div>
         <div class="card-body">
             @using (Html.BeginForm())
             {
@@ -45,15 +41,12 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-default" />
+                            <input type="submit" value="Crear" class="btn btn-primary" />
+                            @Html.ActionLink("Cancelar", "Index", "Compra", null, new { @class = "btn btn-secondary" })
                         </div>
                     </div>
                 </div>
             }
-
-            <div>
-                @Html.ActionLink("Back to List", "Index")
-            </div>
         </div>
     </div>
 </div>
