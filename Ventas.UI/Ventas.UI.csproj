@@ -176,7 +176,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
-    <Compile Include="Controllers\VentasController.cs" />
+    <Compile Include="Controllers\VentaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -247,7 +247,6 @@
     <Content Include="Views\Proveedor\Edit.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\Ventas\Create.cshtml" />
-    <Content Include="Views\Ventas\Delete.cshtml" />
     <Content Include="Views\Ventas\Details.cshtml" />
     <Content Include="Views\Ventas\Edit.cshtml" />
     <Content Include="Views\Ventas\Index.cshtml" />

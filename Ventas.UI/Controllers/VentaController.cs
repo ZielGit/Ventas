@@ -1,24 +1,24 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ventas.Dominio.Modelos;
-using Ventas.Infraestructura.Repositorios.Base;
+using Ventas.Infraestructura.Repositorios;
 
 namespace Ventas.UI.Controllers
 {
-    public class VentasController : Controller
+    public class VentaController : Controller
     {
-        private VentasDbContexto db = new VentasDbContexto();
+        VentaRepositorio dbVenta = new VentaRepositorio();
 
         // GET: Ventas
         public ActionResult Index()
         {
-            return View(db.Venta.ToList());
+            var lista = dbVenta.ListarVentas();
+
+            return View(lista);
         }
 
         // GET: Ventas/Details/5
@@ -28,7 +28,7 @@ namespace Ventas.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Venta venta = db.Venta.Find(id);
+            Venta venta = dbVenta.ObtenerPorId(id.Value);
             if (venta == null)
             {
                 return HttpNotFound();
@@ -37,25 +37,22 @@ namespace Ventas.UI.Controllers
         }
 
         // GET: Ventas/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Ventas/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FechaVenta,impuesto,total")] Venta venta)
         {
             if (ModelState.IsValid)
             {
-                db.Venta.Add(venta);
-                db.SaveChanges();
+                dbVenta.Agregar(venta);
                 return RedirectToAction("Index");
             }
-
             return View(venta);
         }
 
@@ -66,7 +63,7 @@ namespace Ventas.UI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Venta venta = db.Venta.Find(id);
+            Venta venta = dbVenta.ObtenerPorId(id.Value);
             if (venta == null)
             {
                 return HttpNotFound();
@@ -75,54 +72,25 @@ namespace Ventas.UI.Controllers
         }
 
         // POST: Ventas/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FechaVenta,impuesto,total")] Venta venta)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(venta).State = EntityState.Modified;
-                db.SaveChanges();
+                dbVenta.Modificar(venta);
                 return RedirectToAction("Index");
             }
             return View(venta);
         }
 
-        // GET: Ventas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Venta venta = db.Venta.Find(id);
-            if (venta == null)
-            {
-                return HttpNotFound();
-            }
-            return View(venta);
-        }
-
         // POST: Ventas/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
-            Venta venta = db.Venta.Find(id);
-            db.Venta.Remove(venta);
-            db.SaveChanges();
+            dbVenta.Eliminar(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
