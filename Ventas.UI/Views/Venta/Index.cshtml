@@ -82,7 +82,7 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            @using (Html.BeginForm("Delete", "Ventas", FormMethod.Post))
+            @using (Html.BeginForm("Delete", "Venta", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="id" id="deleteId" value="" />

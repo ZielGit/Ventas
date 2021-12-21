@@ -246,10 +246,11 @@
     <Content Include="Views\Proveedor\Details.cshtml" />
     <Content Include="Views\Proveedor\Edit.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
-    <Content Include="Views\Ventas\Create.cshtml" />
-    <Content Include="Views\Ventas\Details.cshtml" />
-    <Content Include="Views\Ventas\Edit.cshtml" />
-    <Content Include="Views\Ventas\Index.cshtml" />
+    <Content Include="Views\Venta\Create.cshtml" />
+    <Content Include="Views\Venta\Delete.cshtml" />
+    <Content Include="Views\Venta\Details.cshtml" />
+    <Content Include="Views\Venta\Edit.cshtml" />
+    <Content Include="Views\Venta\Index.cshtml" />
     <Content Include="Views\Compra\Create.cshtml" />
     <Content Include="Views\Compra\Details.cshtml" />
     <Content Include="Views\Compra\Edit.cshtml" />

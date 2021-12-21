@@ -21,7 +21,7 @@ namespace Ventas.UI.Controllers
             return View(lista);
         }
 
-        // GET: Ventas/Details/5
+        // GET: Venta/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,14 +36,14 @@ namespace Ventas.UI.Controllers
             return View(venta);
         }
 
-        // GET: Ventas/Create
+        // GET: Venta/Create
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Ventas/Create
+        // POST: Venta/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FechaVenta,impuesto,total")] Venta venta)
@@ -56,7 +56,7 @@ namespace Ventas.UI.Controllers
             return View(venta);
         }
 
-        // GET: Ventas/Edit/5
+        // GET: Venta/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -71,7 +71,7 @@ namespace Ventas.UI.Controllers
             return View(venta);
         }
 
-        // POST: Ventas/Edit/5
+        // POST: Venta/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FechaVenta,impuesto,total")] Venta venta)
@@ -84,7 +84,7 @@ namespace Ventas.UI.Controllers
             return View(venta);
         }
 
-        // POST: Ventas/Delete/5
+        // POST: Venta/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
