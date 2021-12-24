@@ -12,7 +12,7 @@ namespace Ventas.Infraestructura.Repositorios.Base
 {
     public class VentasDbContexto : DbContext
     {
-        public VentasDbContexto() : base("name=cadenaVentasNube")
+        public VentasDbContexto() : base("name=cadenaVentas")
         {
         }
 
