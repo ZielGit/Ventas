@@ -73,6 +73,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Migrations\202112230024002_InitialCreate.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ventas.Dominio\Ventas.Dominio.csproj">
